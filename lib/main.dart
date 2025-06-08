@@ -22,6 +22,7 @@ class MainApp extends ConsumerWidget {
     final userAsyncValue = ref.watch(userAuthProvider);
 
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: userAsyncValue.when(
         data: (user) {
           return user == null
