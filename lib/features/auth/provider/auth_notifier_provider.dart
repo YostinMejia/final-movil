@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:chiva_exp/features/auth/infrastructure/auth_repository.dart';
+import 'package:chiva_exp/features/auth/infrastructure/repository/auth_repository.dart';
 import 'package:chiva_exp/features/auth/provider/auth_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

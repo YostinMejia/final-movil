@@ -28,10 +28,21 @@ class Place {
     return Place(
       id: json["id"],
       principalImageUrl: json["principalImageUrl"],
-      secondaryImagesUrls: json["secondaryImagesUrls"],
+      secondaryImagesUrls: List<String>.from(json["secondaryImagesUrls"]),
       promPrice: json["promPrice"],
       stars: json["stars"],
       name: json["name"],
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      "id": id,
+      "principalImageUrl": principalImageUrl,
+      "secondaryImagesUrls": secondaryImagesUrls,
+      "promPrice": promPrice,
+      "stars": stars,
+      "name": name,
+    };
   }
 }
