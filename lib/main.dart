@@ -1,3 +1,4 @@
+import 'package:chiva_exp/features/category/presentation/screens/category_screen.dart';
 import 'package:chiva_exp/features/map/presentation/map_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -37,7 +38,7 @@ class MainApp extends ConsumerWidget {
               ? const LoginScreen()
               : HomeScreen(
                   pages: const [
-                    Placeholder(),
+                    CategoryScreen(),
                     MapScreen(),
                     PlaceScreen(),
                     ProfileScreen(),
