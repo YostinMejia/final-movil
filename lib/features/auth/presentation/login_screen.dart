@@ -103,49 +103,7 @@ class LoginScreen extends StatelessWidget {
                     ),
                     padding: EdgeInsets.all(formPadding),
                     child: const LoginForm(),
-                  ),
-                  
-                  SizedBox(height: isLandscape ? 24.0 : 32.0),
-                  
-                  // Login button
-                  Container(
-                    width: double.infinity,
-                    constraints: BoxConstraints(
-                      maxWidth: isDesktop ? 400.0 : double.infinity,
-                    ),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFD4915D),
-                      borderRadius: BorderRadius.circular(16),
-                      boxShadow: [
-                        BoxShadow(
-                          color: const Color(0xFFD4915D).withOpacity(0.3),
-                          blurRadius: 12,
-                          offset: const Offset(0, 4),
-                        ),
-                      ],
-                    ),
-                    child: TextButton(
-                      onPressed: () {
-                        // Login logic here
-                      },
-                      style: TextButton.styleFrom(
-                        padding: EdgeInsets.symmetric(
-                          vertical: isTablet ? 20.0 : 18.0,
-                        ),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(16),
-                        ),
-                      ),
-                      child: Text(
-                        "Iniciar Sesión",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: isTablet ? 18.0 : 16.0,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ),
-                  ),
+                  ),        
                   
                   SizedBox(height: isLandscape ? 16.0 : 24.0),
                   
