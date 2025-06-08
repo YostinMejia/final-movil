@@ -18,18 +18,39 @@ class _LoginFormState extends ConsumerState<LoginForm> {
 
   @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.of(context).size;
+    final isTablet = screenSize.width > 600;
+    
     return Form(
       key: _formKey,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
-
         child: Column(
           children: [
             TextFormField(
               decoration: InputDecoration(
                 hintText: "Enter your email",
-                border: OutlineInputBorder(),
-                label: Text("Email", style: TextStyle(fontSize: 30)),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide(color: const Color(0xFFE5E5E5)),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide(color: const Color(0xFFE5E5E5)),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide(color: const Color(0xFFD4915D), width: 2),
+                ),
+                label: Text(
+                  "Email",
+                  style: TextStyle(color: const Color(0xFF6B6B6B)),
+                ),
+                hintStyle: TextStyle(color: const Color(0xFF9B9B9B)),
+                contentPadding: EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: isTablet ? 20 : 16,
+                ),
               ),
               controller: _emailController,
               validator: (value) {
@@ -43,20 +64,75 @@ class _LoginFormState extends ConsumerState<LoginForm> {
             TextFormField(
               decoration: InputDecoration(
                 hintText: "Enter your password",
-                border: OutlineInputBorder(),
-                label: Text("Password", style: TextStyle(fontSize: 30)),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide(color: const Color(0xFFE5E5E5)),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide(color: const Color(0xFFE5E5E5)),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide(color: const Color(0xFFD4915D), width: 2),
+                ),
+                label: Text(
+                  "Password",
+                  style: TextStyle(color: const Color(0xFF6B6B6B)),
+                ),
+                hintStyle: TextStyle(color: const Color(0xFF9B9B9B)),
+                contentPadding: EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: isTablet ? 20 : 16,
+                ),
               ),
               controller: _passwordController,
               validator: notNullOrEmpty,
+              obscureText: true,
             ),
-
-            ElevatedButton(
-              onPressed: () {
-                if (_formKey.currentState!.validate()) {
-                  ref.read(authNotifierProvider.notifier).login(_emailController.text, _passwordController.text);
-                }
-              },
-              child: const Text("Submit"),
+            
+            SizedBox(height: 32),
+            
+            // Styled Submit Button matching the design
+            Container(
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: const Color(0xFFD4915D),
+                borderRadius: BorderRadius.circular(16),
+                boxShadow: [
+                  BoxShadow(
+                    color: const Color(0xFFD4915D).withOpacity(0.3),
+                    blurRadius: 12,
+                    offset: const Offset(0, 4),
+                  ),
+                ],
+              ),
+              child: TextButton(
+                onPressed: () {
+                  if (_formKey.currentState!.validate()) {
+                    ref.read(authNotifierProvider.notifier).login(
+                      _emailController.text, 
+                      _passwordController.text
+                    );
+                  }
+                },
+                style: TextButton.styleFrom(
+                  padding: EdgeInsets.symmetric(
+                    vertical: isTablet ? 20.0 : 18.0,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                ),
+                child: Text(
+                  "Iniciar Sesión",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: isTablet ? 18.0 : 16.0,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
             ),
           ],
         ),
