@@ -16,7 +16,7 @@ class Place {
   });
 
   factory Place.fromJson(Map<String, dynamic> json) {
-    if (json["id"] ||
+    if (json["id"] == null ||
         json["principalImageUrl"] == null ||
         json["secondaryImagesUrls"] == null ||
         json["stars"] == null ||

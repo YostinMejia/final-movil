@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class NoPlacesFound extends StatelessWidget {
-  const NoPlacesFound({super.key});
+class UserNotFound extends StatelessWidget {
+  const UserNotFound({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -10,8 +10,8 @@ class NoPlacesFound extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(Icons.do_not_disturb_alt_sharp),
-          Text("No hay sitios turísticos"),
+          Icon(Icons.priority_high_outlined),
+          Text("Usuario no encontrado"),
         ],
       ),
     );

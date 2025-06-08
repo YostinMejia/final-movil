@@ -142,13 +142,12 @@ class PlaceOnlineDatasource extends PlaceDatasource {
   }
 
   @override
-  Future<Place?> fetchProductById(String id)async {
+  Future<Place?> fetchProductById(String id) async {
     List<Map<String, dynamic>> placesRaw = PlaceOnlineDatasource._mockPlaces;
-        Map<String, dynamic>? placeRaw = placesRaw.cast<Map<String, dynamic>?>().firstWhere(
-  (place) => place?["id"] == id,
-  orElse: () => null,
-);
+    Map<String, dynamic>? placeRaw = placesRaw
+        .cast<Map<String, dynamic>?>()
+        .firstWhere((place) => place?["id"] == id, orElse: () => null);
 
-     return placeRaw != null?Place.fromJson(placeRaw):null;
+    return placeRaw != null ? Place.fromJson(placeRaw) : null;
   }
 }

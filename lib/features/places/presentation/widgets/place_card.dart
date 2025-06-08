@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class PlaceCard extends StatelessWidget {
   final Place place;
-  final Function(BuildContext, Place) onTap;
+  final Function(BuildContext, String) onTap;
 
   const PlaceCard({super.key, required this.place, required this.onTap});
 
@@ -21,7 +21,7 @@ class PlaceCard extends StatelessWidget {
       elevation: 4,
       child: InkWell(
         borderRadius: BorderRadius.circular(12),
-        onTap: () => {onTap(context, place)},
+        onTap: () => {onTap(context, place.id)},
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -60,7 +60,6 @@ class PlaceCard extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Place name
                   Text(
                     place.name,
                     style: theme.textTheme.titleMedium?.copyWith(

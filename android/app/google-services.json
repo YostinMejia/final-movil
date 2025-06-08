@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "636204243312",
+    "project_id": "final-movil-8ef07",
+    "storage_bucket": "final-movil-8ef07.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:636204243312:android:8645127fb203d88c62d7b5",
+        "android_client_info": {
+          "package_name": "com.example.chiva_exp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD_kvZBjPmmbkI7D9bj7740zWOCk9vfACA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -7,7 +7,9 @@ class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
   State<CustomAppBar> createState() => _CustomAppBarState();
 
   @override
-  Size get preferredSize {return const Size.fromHeight(kToolbarHeight);}
+  Size get preferredSize {
+    return const Size.fromHeight(kToolbarHeight);
+  }
 }
 
 class _CustomAppBarState extends State<CustomAppBar> {
@@ -28,7 +30,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
   @override
   Widget build(BuildContext context) {
     final paddingTop = MediaQuery.of(context).padding.top;
-    
+
     return Container(
       padding: EdgeInsets.only(top: paddingTop),
       child: SearchAnchor(
@@ -44,7 +46,10 @@ class _CustomAppBarState extends State<CustomAppBar> {
             leading: const Icon(Icons.search),
           );
         },
-        suggestionsBuilder: (BuildContext context, SearchController controller) {
+        suggestionsBuilder: (
+          BuildContext context,
+          SearchController controller,
+        ) {
           return List<ListTile>.generate(5, (int index) {
             final String item = 'item $index';
             return ListTile(
@@ -54,7 +59,6 @@ class _CustomAppBarState extends State<CustomAppBar> {
                 setState(() {});
               },
             );
-        
           });
         },
       ),

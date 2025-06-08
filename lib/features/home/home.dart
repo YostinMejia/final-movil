@@ -11,14 +11,20 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
-  int _currentIndex = 1;
+  int _currentIndex = 2;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(),
-        bottomNavigationBar: CustomBottomNavBar(currentIndex: 1,onTap: (value){setState(() =>_currentIndex = value);},),
-        body: widget.pages[_currentIndex]
-      );
+      bottomNavigationBar: CustomBottomNavBar(
+        currentIndex: _currentIndex,
+        onTap: (value) {
+          setState(() {
+            _currentIndex = value;
+          });
+        },
+      ),
+      body: widget.pages[_currentIndex],
+    );
   }
 }

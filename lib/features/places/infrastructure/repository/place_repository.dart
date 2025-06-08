@@ -5,10 +5,11 @@ class PlaceRepository {
   final PlaceOnlineDatasource placeOnlineDatasource;
   const PlaceRepository({required this.placeOnlineDatasource});
 
-  Future<List<Place>> getPlaces(){
+  Future<List<Place>> getPlaces() {
     return placeOnlineDatasource.fetchPlaces();
   }
-  Future<Place?> getPlaceById(String id){
+
+  Future<Place?> getPlaceById(String id) {
     return placeOnlineDatasource.fetchProductById(id);
   }
 }

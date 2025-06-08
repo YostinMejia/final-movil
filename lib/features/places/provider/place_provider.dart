@@ -3,13 +3,17 @@ import 'package:chiva_exp/features/places/infrastructure/datasource/place_online
 import 'package:chiva_exp/features/places/infrastructure/repository/place_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final placeRepositoryProvider = Provider<PlaceRepository>((ref){
-  final PlaceOnlineDatasource placeDatasource = PlaceOnlineDatasource(); 
+final placeRepositoryProvider = Provider<PlaceRepository>((ref) {
+  final PlaceOnlineDatasource placeDatasource = PlaceOnlineDatasource();
   return PlaceRepository(placeOnlineDatasource: placeDatasource);
-
 });
 
-final placeProvider = FutureProvider<List<Place>>((ref)async{
+final placesProvider = FutureProvider<List<Place>>((ref) async {
   final placeService = ref.watch(placeRepositoryProvider);
   return await placeService.getPlaces();
+});
+
+final placeProvider = FutureProvider.family<Place?, String>((ref, id) async {
+  final placeService = ref.watch(placeRepositoryProvider);
+  return await placeService.getPlaceById(id);
 });
