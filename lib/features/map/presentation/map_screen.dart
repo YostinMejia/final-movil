@@ -5,7 +5,6 @@ import 'package:flutter_map_marker_popup/flutter_map_marker_popup.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:http/http.dart' as http;
 
-// Define the Place class
 class Place {
   final String id;
   final String name;
@@ -40,11 +39,12 @@ class _MapScreenState extends State<MapScreen> {
 
   Future<void> _loadTouristPlaces() async {
     final uri = Uri.parse(
-        'https://nominatim.openstreetmap.org/search.php'
-        '?q=attractions+near+Medellin'
-        '&format=jsonv2'
-        '&accept-language=en'
-        '&email=your@email.com');
+      'https://nominatim.openstreetmap.org/search.php'
+      '?q=attractions+near+Medellin'
+      '&format=jsonv2'
+      '&accept-language=en'
+      '&email=your@email.com',
+    );
 
     final response = await http.get(uri, headers: {'User-Agent': 'FlutterApp'});
 
@@ -94,21 +94,35 @@ class _MapScreenState extends State<MapScreen> {
           ),
           PopupMarkerLayerWidget(
             options: PopupMarkerLayerOptions(
-              markers: _places.map((p) => Marker(
-                width: 40,
-                height: 40,
-                point: LatLng(p.latitude, p.longitude),
-                builder: (ctx) => const Icon(
-                  Icons.location_on,
-                  color: Colors.red,
-                  size: 30,
-                ),
-              )).toList(),
+              markers:
+                  _places
+                      .map(
+                        (p) => Marker(
+                          width: 40,
+                          height: 40,
+                          point: LatLng(p.latitude, p.longitude),
+                          builder:
+                              (ctx) => const Icon(
+                                Icons.location_on,
+                                color: Colors.red,
+                                size: 30,
+                              ),
+                        ),
+                      )
+                      .toList(),
               popupController: _popupController,
               popupBuilder: (BuildContext ctx, Marker marker) {
                 final place = _places.firstWhere(
-                  (pl) => pl.latitude == marker.point.latitude && pl.longitude == marker.point.longitude,
-                  orElse: () => Place(id: '', name: 'Unknown', latitude: marker.point.latitude, longitude: marker.point.longitude),
+                  (pl) =>
+                      pl.latitude == marker.point.latitude &&
+                      pl.longitude == marker.point.longitude,
+                  orElse:
+                      () => Place(
+                        id: '',
+                        name: 'Unknown',
+                        latitude: marker.point.latitude,
+                        longitude: marker.point.longitude,
+                      ),
                 );
                 return Card(
                   child: Padding(

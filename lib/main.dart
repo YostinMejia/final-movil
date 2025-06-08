@@ -1,3 +1,4 @@
+import 'package:chiva_exp/features/map/presentation/map_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -7,7 +8,6 @@ import 'package:chiva_exp/features/auth/presentation/login_screen.dart';
 import 'package:chiva_exp/features/auth/provider/auth_provider.dart';
 import 'package:chiva_exp/features/home/home.dart';
 import 'package:chiva_exp/features/places/presentation/place_screen.dart';
-import 'package:chiva_exp/features/places/presentation/map_screen.dart';
 import 'package:chiva_exp/features/profile/presentation/profile_screen.dart';
 
 void main() async {
@@ -28,7 +28,7 @@ class MainApp extends ConsumerWidget {
       title: 'Chiva Exp',
       theme: ThemeData(primarySwatch: Colors.blue),
       routes: {
-        '/places': (_) => const PlaceScreen(places: []),
+        '/places': (_) => const PlaceScreen(),
         '/map': (_) => const MapScreen(),
       },
       home: userAsyncValue.when(
@@ -39,7 +39,7 @@ class MainApp extends ConsumerWidget {
                   pages: const [
                     Placeholder(),
                     MapScreen(),
-                    PlaceScreen(places: []),
+                    PlaceScreen(),
                     ProfileScreen(),
                   ],
                 );
