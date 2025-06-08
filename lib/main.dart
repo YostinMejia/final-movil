@@ -1,12 +1,14 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:firebase_core/firebase_core.dart';
+
+import 'package:chiva_exp/firebase_options.dart';
 import 'package:chiva_exp/features/auth/presentation/login_screen.dart';
 import 'package:chiva_exp/features/auth/provider/auth_provider.dart';
 import 'package:chiva_exp/features/home/home.dart';
 import 'package:chiva_exp/features/places/presentation/place_screen.dart';
-import 'package:chiva_exp/firebase_options.dart';
+import 'package:chiva_exp/features/places/presentation/map_screen.dart';
 import 'package:chiva_exp/features/profile/presentation/profile_screen.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter/material.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,18 +25,24 @@ class MainApp extends ConsumerWidget {
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      title: 'Chiva Exp',
+      theme: ThemeData(primarySwatch: Colors.blue),
+      routes: {
+        '/places': (_) => const PlaceScreen(places: []),
+        '/map': (_) => const MapScreen(),
+      },
       home: userAsyncValue.when(
         data: (user) {
           return user == null
-              ? LoginScreen()
+              ? const LoginScreen()
               : HomeScreen(
-                pages: [
-                  Placeholder(),
-                  Placeholder(),
-                  PlaceScreen(),
-                  ProfileScreen(),
-                ],
-              );
+                  pages: const [
+                    Placeholder(),
+                    MapScreen(),
+                    PlaceScreen(places: []),
+                    ProfileScreen(),
+                  ],
+                );
         },
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (error, stack) => Center(child: Text('Error: $error')),
