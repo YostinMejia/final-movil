@@ -1,12 +1,15 @@
+import 'package:chiva_exp/features/places/domain/model/place.dart';
 import 'package:chiva_exp/features/places/presentation/widgets/details/place_description.dart';
 import 'package:chiva_exp/features/places/presentation/widgets/details/place_details.dart';
-import 'package:chiva_exp/features/places/presentation/widgets/details/place_options.dart';
+import 'package:chiva_exp/features/places/presentation/widgets/details/place_opinions.dart';
+import 'package:chiva_exp/features/places/presentation/widgets/details/section_option.dart';
 import 'package:flutter/material.dart';
 
 enum Sections { description, details, comments }
 
 class TabOptions extends StatefulWidget {
-  const TabOptions({super.key});
+  final Place place;
+  const TabOptions({super.key, required this.place});
 
   @override
   State<TabOptions> createState() => _TabOptionsState();
@@ -29,51 +32,44 @@ class _TabOptionsState extends State<TabOptions> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              _buildSectionButton(context, Sections.description, "Descripción"),
-              _buildSectionButton(context, Sections.details, "details"),
-              _buildSectionButton(context, Sections.comments, "comments"),
+              SectionOption(
+                isActive: currentSection == Sections.description,
+                text: "Descripción",
+                onPressed:
+                    () => setState(() => currentSection = Sections.description),
+              ),
+              SectionOption(
+                isActive: currentSection == Sections.details,
+                text: "Detalles",
+                onPressed:
+                    () => setState(() => currentSection = Sections.details),
+              ),
+              SectionOption(
+                isActive: currentSection == Sections.comments,
+                text: "Comentarios",
+                onPressed:
+                    () => setState(() => currentSection = Sections.comments),
+              ),
             ],
           ),
         ),
 
-        // Contenido dinámico
         Expanded(
           child: Padding(
             padding: const EdgeInsets.all(16.0),
-            child: _buildSectionContent(),
+            child: () {
+              switch (currentSection) {
+                case Sections.description:
+                  return  PlaceDescription(description: widget.place.description,);
+                case Sections.details:
+                  return  PlaceDetails(details: widget.place.details,);
+                case Sections.comments:
+                  return  PlaceOpinions(comments: widget.place.comments,);
+              }
+            }(),
           ),
         ),
       ],
     );
-  }
-
-  Widget _buildSectionButton(
-    BuildContext context,
-    Sections section,
-    String text,
-  ) {
-    final bool isActive = currentSection == section;
-    return TextButton(
-      onPressed: () => setState(() => currentSection = section),
-      style: TextButton.styleFrom(
-        foregroundColor:
-            isActive ? Theme.of(context).primaryColor : Colors.grey,
-        textStyle: TextStyle(
-          fontWeight: isActive ? FontWeight.bold : FontWeight.normal,
-        ),
-      ),
-      child: Text(text),
-    );
-  }
-
-  Widget _buildSectionContent() {
-    switch (currentSection) {
-      case Sections.description:
-        return const PlaceDescription();
-      case Sections.details:
-        return const PlaceDetails();
-      case Sections.comments:
-        return const PlaceOptions();
-    }
   }
 }

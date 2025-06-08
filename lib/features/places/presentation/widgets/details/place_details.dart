@@ -1,21 +1,25 @@
 import 'package:flutter/material.dart';
 
 class PlaceDetails extends StatelessWidget {
-  const PlaceDetails({super.key});
+  final Map<String, dynamic> details;
+  const PlaceDetails({super.key, required this.details});
 
   @override
   Widget build(BuildContext context) {
+    final String schedule = details['schedule'] ?? 'No disponible';
+    final String price = details['averagePrice']?.toString() ?? 'No disponible';
+
     return ListView(
-      children: const [
+      children: [
         ListTile(
-          leading: Icon(Icons.access_time),
-          title: Text("Horario de atención"),
-          subtitle: Text("9:00 AM - 6:00 PM"),
+          leading: const Icon(Icons.access_time),
+          title: const Text("Horario de atención"),
+          subtitle: Text(schedule),
         ),
         ListTile(
-          leading: Icon(Icons.attach_money),
-          title: Text("Precio promedio"),
-          subtitle: Text("\$25,000 COP"),
+          leading: const Icon(Icons.attach_money),
+          title: const Text("Precio promedio"),
+          subtitle: Text("\$$price COP"),
         ),
       ],
     );

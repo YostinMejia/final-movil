@@ -40,7 +40,7 @@ class PlaceDetailScreen extends ConsumerWidget {
                         ...place.secondaryImagesUrls,
                       ],
                     ),
-                    const Expanded(child: TabOptions()),
+                    Expanded(child: TabOptions(place: place,)),
                   ],
                 ),
               );

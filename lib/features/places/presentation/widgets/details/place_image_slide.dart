@@ -31,7 +31,6 @@ class LoadImageNetwork extends StatelessWidget {
     return Image.network(
       url,
       fit: BoxFit.cover,
-      // width: double.infinity,
       loadingBuilder: (context, child, loadingProgress) {
         if (loadingProgress == null) return child;
         return Container(

@@ -1,3 +1,5 @@
+import 'package:chiva_exp/features/places/domain/model/comment.dart';
+
 class Place {
   String id;
   String principalImageUrl;
@@ -5,6 +7,9 @@ class Place {
   String name;
   num promPrice;
   num stars;
+  String description;
+  Map<String, dynamic> details;
+  List<Comment> comments;
 
   Place({
     required this.id,
@@ -13,6 +18,9 @@ class Place {
     required this.promPrice,
     required this.stars,
     required this.name,
+    required this.description,
+    required this.details,
+    required this.comments,
   });
 
   factory Place.fromJson(Map<String, dynamic> json) {
@@ -22,9 +30,10 @@ class Place {
         json["stars"] == null ||
         json["name"] == null) {
       throw FormatException(
-        'Missing required fields. Required params: id,principalImageUrl, secondaryImagesUrls, promPrice, stars, name',
+        'Missing required fields. Required params: id, principalImageUrl, secondaryImagesUrls, promPrice, stars, name',
       );
     }
+
     return Place(
       id: json["id"],
       principalImageUrl: json["principalImageUrl"],
@@ -32,6 +41,11 @@ class Place {
       promPrice: json["promPrice"],
       stars: json["stars"],
       name: json["name"],
+      description: json["description"] ?? '',
+      details: Map<String, dynamic>.from(json["details"] ?? {}),
+      comments: (json["comments"] as List<dynamic>? ?? [])
+          .map((comment) => Comment.fromJson(comment))
+          .toList(),
     );
   }
 
@@ -43,6 +57,9 @@ class Place {
       "promPrice": promPrice,
       "stars": stars,
       "name": name,
+      "description": description,
+      "details": details,
+      "comments": comments.map((c) => c.toJson()).toList(),
     };
   }
 }

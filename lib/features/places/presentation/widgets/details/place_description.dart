@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 
 class PlaceDescription extends StatelessWidget {
-  const PlaceDescription({super.key});
+  final String description;
+  const PlaceDescription({super.key, required this.description});
 
   @override
   Widget build(BuildContext context) {
-    return const SingleChildScrollView(
+    return  SingleChildScrollView(
       child: Text(
-        "Descripción detallada del lugar...",
+        description,
         style: TextStyle(fontSize: 16),
       ),
     );
