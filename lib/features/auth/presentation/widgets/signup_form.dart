@@ -21,6 +21,9 @@ class _SignUpFormState extends ConsumerState<SignUpForm> {
 
   @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.of(context).size;
+    final isTablet = screenSize.width > 600;
+    
     return Form(
       key: _formKey,
       child: Padding(
@@ -30,11 +33,60 @@ class _SignUpFormState extends ConsumerState<SignUpForm> {
             TextFormField(
               controller: _nameController,
               validator: notNullOrEmpty,
-              decoration: InputDecoration(label: Text("Name")),
+              decoration: InputDecoration(
+                label: Text(
+                  "Nombre",
+                  style: TextStyle(color: const Color(0xFF6B6B6B)),
+                ),
+                hintText: "Ingresa tu nombre completo",
+                hintStyle: TextStyle(color: const Color(0xFF9B9B9B)),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide(color: const Color(0xFFE5E5E5)),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide(color: const Color(0xFFE5E5E5)),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide(color: const Color(0xFFD4915D), width: 2),
+                ),
+                contentPadding: EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: isTablet ? 20 : 16,
+                ),
+              ),
             ),
+            
+            SizedBox(height: 20),
+            
             TextFormField(
               controller: _emailController,
-              decoration: InputDecoration(label: Text("Email")),
+              decoration: InputDecoration(
+                label: Text(
+                  "Email",
+                  style: TextStyle(color: const Color(0xFF6B6B6B)),
+                ),
+                hintText: "Ingresa tu correo electrónico",
+                hintStyle: TextStyle(color: const Color(0xFF9B9B9B)),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide(color: const Color(0xFFE5E5E5)),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide(color: const Color(0xFFE5E5E5)),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide(color: const Color(0xFFD4915D), width: 2),
+                ),
+                contentPadding: EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: isTablet ? 20 : 16,
+                ),
+              ),
               validator: (value) {
                 String? notEmpty = notNullOrEmpty(value);
                 if (notEmpty != null) return notEmpty;
@@ -42,9 +94,36 @@ class _SignUpFormState extends ConsumerState<SignUpForm> {
                 return email;
               },
             ),
+            
+            SizedBox(height: 20),
+            
             TextFormField(
               controller: _passwordController,
-              decoration: InputDecoration(label: Text("Password")),
+              obscureText: true,
+              decoration: InputDecoration(
+                label: Text(
+                  "Contraseña",
+                  style: TextStyle(color: const Color(0xFF6B6B6B)),
+                ),
+                hintText: "Crea una contraseña segura",
+                hintStyle: TextStyle(color: const Color(0xFF9B9B9B)),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide(color: const Color(0xFFE5E5E5)),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide(color: const Color(0xFFE5E5E5)),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide(color: const Color(0xFFD4915D), width: 2),
+                ),
+                contentPadding: EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: isTablet ? 20 : 16,
+                ),
+              ),
               validator: (value) {
                 String? notEmpty = notNullOrEmpty(value);
                 if (notEmpty != null) return notEmpty;
@@ -52,9 +131,36 @@ class _SignUpFormState extends ConsumerState<SignUpForm> {
                 return password;
               },
             ),
+            
+            SizedBox(height: 20),
+            
             TextFormField(
               controller: _confirmPasswordController,
-              decoration: InputDecoration(label: Text("Confirm the password")),
+              obscureText: true,
+              decoration: InputDecoration(
+                label: Text(
+                  "Confirmar Contraseña",
+                  style: TextStyle(color: const Color(0xFF6B6B6B)),
+                ),
+                hintText: "Confirma tu contraseña",
+                hintStyle: TextStyle(color: const Color(0xFF9B9B9B)),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide(color: const Color(0xFFE5E5E5)),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide(color: const Color(0xFFE5E5E5)),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide(color: const Color(0xFFD4915D), width: 2),
+                ),
+                contentPadding: EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: isTablet ? 20 : 16,
+                ),
+              ),
               validator: (value) {
                 String? notEmpty = notNullOrEmpty(value);
                 if (notEmpty != null) return notEmpty;
@@ -66,15 +172,50 @@ class _SignUpFormState extends ConsumerState<SignUpForm> {
               },
             ),
 
-            ElevatedButton(
-              onPressed: () {
-                //Validates and verify all the form fields
-                if (_formKey.currentState!.validate()) {
-                  ref.read(authNotifierProvider.notifier).register(_emailController.text, _passwordController.text);
-                  Navigator.pop(context);
-                }
-              },
-              child: Text("Submit"),
+            SizedBox(height: 32),
+
+            // Styled Submit Button matching the design
+            Container(
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: const Color(0xFFD4915D),
+                borderRadius: BorderRadius.circular(16),
+                boxShadow: [
+                  BoxShadow(
+                    color: const Color(0xFFD4915D).withOpacity(0.3),
+                    blurRadius: 12,
+                    offset: const Offset(0, 4),
+                  ),
+                ],
+              ),
+              child: TextButton(
+                onPressed: () {
+                  //Validates and verify all the form fields
+                  if (_formKey.currentState!.validate()) {
+                    ref.read(authNotifierProvider.notifier).register(
+                      _emailController.text, 
+                      _passwordController.text
+                    );
+                    Navigator.pop(context);
+                  }
+                },
+                style: TextButton.styleFrom(
+                  padding: EdgeInsets.symmetric(
+                    vertical: isTablet ? 20.0 : 18.0,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                ),
+                child: Text(
+                  "Crear Cuenta",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: isTablet ? 18.0 : 16.0,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
             ),
           ],
         ),
